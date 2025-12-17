@@ -6,7 +6,6 @@ This project is a **MATLAB App Designer application** for implementing and visua
 The application allows users to load an image, apply different **spatial and intensity-based filters**, preview the processed image, and save the result.  
 All operations are implemented **manually using pixel-level processing**, not relying on MATLAB built-in high-level image processing functions (except basic I/O).
 
----
 
 ## 🎯 Project Objectives
 - Understand digital image representation
@@ -15,7 +14,7 @@ All operations are implemented **manually using pixel-level processing**, not re
 - Practice GUI-based image processing using MATLAB App Designer
 - Visualize original and processed images side by side
 
----
+
 
 ## 🛠️ Technologies Used
 - **MATLAB**
@@ -23,7 +22,7 @@ All operations are implemented **manually using pixel-level processing**, not re
 - **Image Processing Concepts**
 - **Matrix & Pixel Manipulation**
 
----
+
 
 ## 📂 Application Features
 
@@ -32,7 +31,7 @@ All operations are implemented **manually using pixel-level processing**, not re
 - Display original image
 - Save processed image in different formats
 
----
+
 
 ## 🧠 Implemented Image Processing Operations
 
