@@ -210,7 +210,14 @@ Enhance low-intensity (dark) regions
 Compress high-intensity values
 
 ```matlab
-Output = c * log(1 + Input);
+c = app.BrightnessButtonSlider.Value;
+            img =double(app.Image);                       
+            Transform = c * log(1 + img);
+            Transform = uint8(Transform);
+            app.ProcessedImage = Transform;
+            imshow(Transform, 'Parent', app.UIAxes_2);
+            axis(app.UIAxes_2, 'image');
+            axis(app.UIAxes_2, 'off');
 ```
 
 5️⃣ Average Filter (Smoothing Filter)
@@ -229,7 +236,36 @@ Grayscale images
 
 Color images (channel-wise processing)
 ```matlab
-Output(i,j) = (1/9) * sum(sum(Neighborhood));
+if(app.ColorCheckBox.Value)
+            img = app.Image;
+            [n,m,~] = size(img);
+            k = (1/9);
+            f = zeros(n,m,3);
+            for c = 1:3      
+                for i = 1:n-2
+                    for j =1:m-2
+                        f(i,j,c) =k*sum(sum(img(i:i+2, j:j+2, c)));
+                    end
+                end
+            end
+            imshow(f, 'Parent', app.UIAxes_2);
+            app.ProcessedImage = f;
+           else
+
+            img=app.Image;
+            [n,m]=size(img);
+            f=zeros(n,m);
+            k=(1/9);
+            for i=1:n-2
+                for j=1:m-2
+                    f(i,j)=k*sum(sum(img(i:i+2,j:j+2)));
+                end
+            end
+            imshow(f, 'Parent', app.UIAxes_2);
+            app.ProcessedImage=f;
+            axis(app.UIAxes_2, 'image');
+            axis(app.UIAxes_2, 'off');
+          end                     
 ```
 6️⃣ Salt & Pepper Noise
 
@@ -239,7 +275,12 @@ Adds impulse noise to the image using:
 
 Simulate noise for filter testing
 ```matlab
-imnoise(image, 'salt & pepper', density);
+img=app.Image;
+             img=imnoise(img,"salt & pepper",0.05);
+             imshow(img, 'Parent', app.UIAxes_2);
+             app.ProcessedImage=img;
+             axis(app.UIAxes_2, 'image');
+             axis(app.UIAxes_2, 'off');
 ```
 
 
