@@ -58,6 +58,103 @@ Manual pixel replication
 
 Same concept applied to grayscale images.
 ```matlab
+        % K=20;
+        %  if isfloat(app.Image)
+        %     img = im2uint8(app.Image);   % convert to uint8
+        % else
+        %     img = app.Image;
+        % end
+        %     [m, n, c] = size(app.Image);
+        %     zoomed = zeros(m*K, n*K, c,'uint8');
+        % 
+        % for i = 1:m
+        %     for j = 1:n
+        %         for x= 1:c
+        %             zoomed((i-1)*K+1:i*K, (j-1)*K+1:j*K, x) =img(i,j,x);
+        %         end
+        %     end
+        % end
+        %     app.ProcessedImage=zoomed;
+        %     imshow(zoomed, 'Parent', app.UIAxes_2);
+        %     axis(app.UIAxes_2, 'image');
+        %     axis(app.UIAxes_2, 'off');
+        img=app.Image;
+        [n,m,t]=size(img);
+        k=str2double(app.EditField_5.Value);
+        f=zeros(k*n,k*m,t);
+        c = 1; 
+        r = 1; 
+       for o=1:t
+        for x = 1:size(img, 1) 
+           for y = 1:size(img, 2) 
+               f(r:r+k-1, c:c+k-1,o) = img(x, y,o); 
+               c = c + k; 
+           end 
+           c = 1; 
+           r = r + k; 
+        end 
+        r=1;
+       end
+        app.ProcessedImage = f;
+        imshow(f, 'Parent', app.UIAxes_2); 
+        axis(app.UIAxes_2, 'image');        
+        axis(app.UIAxes_2, 'off');       
+        zoom(app.UIAxes_2, 'on');             
+        pan(app.UIAxes_2, 'on');
+
+
+
+        % K=20;
+        %  if isfloat(app.Image)
+        %     img = im2uint8(app.Image);   % convert to uint8
+        % else
+        %     img = app.Image;
+        % end
+        %     [m, n, c] = size(app.Image);
+        %     zoomed = zeros(m*K, n*K,'uint8');
+        % 
+        % for i = 1:m
+        %     for j = 1:n
+        % 
+        %             zoomed((i-1)*K+1:i*K, (j-1)*K+1:j*K) =img(i,j);
+        % 
+        %     end
+        % end
+        %     app.ProcessedImage=zoomed;
+        %     imshow(zoomed, 'Parent', app.UIAxes_2);
+        %     axis(app.UIAxes_2, 'image');
+        %     axis(app.UIAxes_2, 'off');
+        img=app.Image;
+        [n,m]=size(img);
+        k=str2double(app.EditField_6.Value);
+        f=zeros(k*n,k*m);
+        c = 1; 
+        r = 1; 
+        for x = 1:size(img, 1) 
+           for y = 1:size(img, 2) 
+               f(r:r+k-1, c:c+k-1) = img(x, y); 
+               c = c + k; 
+           end 
+           c = 1; 
+           r = r + k; 
+        end 
+        app.ProcessedImage = f;
+        imshow(f, 'Parent', app.UIAxes_2); 
+        axis(app.UIAxes_2, 'image');        
+        axis(app.UIAxes_2, 'off');       
+        zoom(app.UIAxes_2, 'on');  
+```
+3️⃣ Zero Order Zooming (Interpolation)
+
+Enlarges image by inserting average values between pixels.
+
+📌 Purpose:
+
+Reduce blocky appearance
+
+Improve visual smoothness
+
+```matlab
 img = app.Image;  
         [rows, cols] = size(img); 
         intermediate_rows = 2*rows - 1;
@@ -85,4 +182,3 @@ img = app.Image;
         axis(app.UIAxes_2,'image');
         axis(app.UIAxes_2,'off');
 ```
-
