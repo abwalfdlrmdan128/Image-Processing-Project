@@ -1,6 +1,6 @@
 # 🖼️ MATLAB Image Processing Application
 
- Project Overview
+## 📌 Project Overview
 This project is a **MATLAB App Designer application** for implementing and visualizing **basic and advanced image processing operations**.
 
 The application allows users to load an image, apply different **spatial and intensity-based filters**, preview the processed image, and save the result.  
