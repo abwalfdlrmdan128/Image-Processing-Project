@@ -40,7 +40,24 @@ All operations are implemented **manually using pixel-level processing**, not re
 Converts a color image to grayscale using weighted intensity formula:
 
 ```matlab
-Gray = 0.2989*R + 0.5870*G + 0.1140*B;
+ % im=rgb2gray(app.Image);
+            % imshow(im);
+
+               img=double(app.Image);
+               [m, n, ~] = size(img);     
+               gray = zeros(m, n);        
+               for row = 1:m
+                for col = 1:n
+                    R = img(row, col, 1);
+                    G = img(row, col, 2);
+                    B = img(row, col, 3);
+                    gray(row, col) = 0.2989*R + 0.5870*G + 0.1140*B;
+                end
+               end
+                    app.ProcessedImage=gray;
+                    imshow(gray, 'Parent', app.UIAxes_2);
+                    axis(app.UIAxes_2, 'image');
+                    axis(app.UIAxes_2, 'off');
 ```
 
 ### 2️⃣ K-Time Zooming (Pixel Replication)
@@ -389,4 +406,51 @@ Intensity inversion
         imshow(app.ProcessedImage, 'Parent', app.UIAxes_2);
         axis(app.UIAxes_2, 'image');
         axis(app.UIAxes_2, 'off');
+```
+
+Browse Button
+```matlab
+[file, path] = uigetfile({'*.jpg;*.png;*.bmp','Images'}, 'Select Image');
+        
+            if isequal(file, 0)
+                return;
+            end
+    
+            img = imread(fullfile(path, file));
+            img = im2double(img);
+            app.Image=img;
+            app.PathFill=fullfile(path,file);
+            app.FileName=file;
+            imshow(img, 'Parent', app.UIAxes_3);
+            axis(app.UIAxes_3, 'image');
+            axis(app.UIAxes_3, 'off');
+            app.EditField_2.Value=path;
+            app.EditField.Value=file;
+            app.EditField_3.Value=fullfile(path, file);
+```
+
+Save Button
+
+```matlab
+         
+        % Ask user where to save the file
+         [file, path] = uiputfile({...
+        '*.jpg','JPEG Image (*.jpg)'; 
+        '*.png','PNG Image (*.png)'; 
+        '*.tif','TIFF Image (*.tif)'; 
+        '*.bmp','Bitmap Image (*.bmp)'}, ...
+        'Save Image As');
+
+        % User pressed Cancel
+        if isequal(file,0)
+            return;
+        end
+    
+        % Full file path
+        fullpath = fullfile(path, file);
+        % Example image to save (replace with your image variable)
+        imgToSave = app.ProcessedImage ;   % or app.OriginalImage
+        % Save the image
+        imwrite(imgToSave, fullpath);
+        msgbox('Image saved successfully','Success');
 ```
