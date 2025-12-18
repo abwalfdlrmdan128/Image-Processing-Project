@@ -13,8 +13,14 @@
 ![Avareg Filter](./Images/AvaregFilter.png)
 
 --
-## **Salt&pepper**  
-![Salt&peppe](./Images/Salt&pepper.png)
+
+## **Salt&pepper Noise**  
+![Salt&pepper Noise](./Images/Salt&peperNoise.png)
+
+--
+
+## **Salt&pepper Noise**  
+![Salt&pepper Noise](./Images/Salt&pepperRGB.png)
 
 --
 
