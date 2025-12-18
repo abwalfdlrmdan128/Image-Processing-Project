@@ -14,7 +14,7 @@
 
 --
 ## **Salt&pepper**  
-![Salt&peppe](./Images/Salt&peppe.png)
+![Salt&peppe](./Images/Salt&pepper.png)
 
 --
 
